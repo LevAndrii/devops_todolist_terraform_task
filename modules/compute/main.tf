@@ -7,7 +7,7 @@ resource "azurerm_network_interface" "nic" {
     name                          = "internal"
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id = var.public_ip_address_id
+    public_ip_address_id          = var.public_ip_address_id
   }
 }
 
@@ -23,12 +23,12 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
   disable_password_authentication = true
   admin_ssh_key {
-    username = var.admin_username
+    username   = var.admin_username
     public_key = var.ssh_key_public
   }
 
   os_disk {
-    name = "${var.vm_name}-osdisk"
+    name                 = "${var.vm_name}-osdisk"
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
@@ -53,5 +53,5 @@ resource "azurerm_virtual_machine_extension" "CustomScript" {
       "https://raw.githubusercontent.com/LevAndrii/devops_todolist_terraform_task/main/install-app.sh"
     ]
     commandToExecute = "bash install-app.sh"
-})
+  })
 }
