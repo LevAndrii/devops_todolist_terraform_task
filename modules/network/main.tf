@@ -5,7 +5,7 @@ resource "azurerm_virtual_network" "vnet" {
   resource_group_name = var.resource_group_name
 }
 
-resource "azurerm_subnet" "internal" {
+resource "azurerm_subnet" "main" {
   name                 = var.subnet_name
   resource_group_name  = var.resource_group_name
   virtual_network_name = var.network_name
@@ -43,7 +43,7 @@ resource "azurerm_network_security_group"  "nsg" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "example" {
-  subnet_id                 = azurerm_subnet.internal.id
+  subnet_id                 = azurerm_subnet.main.id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
@@ -52,6 +52,6 @@ resource "azurerm_public_ip" "public_ip" {
   location            = var.location
   resource_group_name = var.resource_group_name
   domain_name_label   = var.dns_label
-  allocation_method   = "Dynamic"
+  allocation_method   = "Static"
   sku                 = "Standard"
 }

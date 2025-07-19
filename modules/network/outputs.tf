@@ -1,9 +1,11 @@
-output "subnet_id" {
-  description = "The ID of the created subnet"
-  value       = azurerm_subnet.internal
+output "public_ip" {
+  value = azurerm_public_ip.public_ip.ip_address
 }
 
-output "public_ip" {
-  description = "The public IP address of the created resource"
-  value = azurerm_public_ip.example.ip_address
+output "public_ip_address_id" {
+  value = azurerm_public_ip.public_ip.id
+}
+
+output "subnet_id" {
+  value = azurerm_subnet.main.id
 }
