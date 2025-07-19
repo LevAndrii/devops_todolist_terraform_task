@@ -45,3 +45,11 @@ module "compute" {
   ssh_key_public        = var.ssh_key_public
   admin_username        = var.admin_username
 }
+
+module "storage" {
+  source                = "./modules/storage"
+  location              = var.location
+  resource_group_name   = var.resource_group_name
+  storage_account_name  = "${var.storage_account_name}${random_integer.suffix.result}"
+  container_name        = var.container_name
+}
